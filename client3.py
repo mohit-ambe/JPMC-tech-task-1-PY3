@@ -24,8 +24,6 @@ import json
 import random
 
 # Server API URLs
-from pip._internal.utils.misc import ask
-
 QUERY = "http://localhost:8080/query?id={}"
 
 # 500 server request
@@ -37,16 +35,14 @@ def getDataPoint(quote):
 	stock = quote['stock']
 	bid_price = float(quote['top_bid']['price'])
 	ask_price = float(quote['top_ask']['price'])
-	price = (bid_price+ask_price)/2
+	price = bid_price
 	return stock, bid_price, ask_price, price
 
 def getRatio(price_a, price_b):
 	""" Get ratio of price_a and price_b """
 	""" ------------- Update this function ------------- """
 	""" Also create some unit tests for this function in client_test.py """
-	if price_b == 0:
-		return
-	return price_a/price_b
+	return 1
 
 # Main
 if __name__ == "__main__":
@@ -60,4 +56,4 @@ if __name__ == "__main__":
 			stock, bid_price, ask_price, price = getDataPoint(quote)
 			print ("Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price))
 
-		print ("Ratio %s" % getRatio(prices['ABC'], prices['DEF']))
+		print ("Ratio %s" % getRatio(price, price))
